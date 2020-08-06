@@ -1,0 +1,14 @@
+{
+    "name": "arxiver",
+    "version": "1.0",
+    "description": "Download arxiv papers to Google Drive",
+    "permissions": ["activeTab", "declarativeContent"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+      },
+      "page_action": {
+        "default_popup": "popup.html"
+      },
+        "manifest_version": 2
+}
