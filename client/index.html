@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arxiver</title>
+</head>
+<body>
+    <h1>Arxiv PDF to Google Drive</h1>
+    <form action="">
+        <label for="id">Enter an arxiv identifier nnnn.nnnn to download to your google drive:</label>
+        <input type="text" id="id" name="id" required><br>
+
+        <label for="root">Name of the existing root folder on your google drive where downloads are stored:</label>
+        <input type="text" id="root" name="root" value="arxiver"><br>
+
+        <input type="submit" value="DOWNLOAD">
+    </form>
+
+    <p>
+        Downloads are stored on your google drive as:
+        <pre>  [root] / [category] / [year] / [title].pdf</pre>
+        using the root folder you specified above and values of the remaining fields obtained from an
+        <a href="https://arxiv.org/help/api">arxiv API query</a>. Notes:
+        <ul>
+            <li>The root folder must already exist and be unique on your google drive.</li>
+            <li>Files larger than 40Mb will not be downloaded.</li>
+            <li>Article titles will be truncated at 250 characters for the file name.</li>
+        </ul>
+    </p>
+</body>
+</html>
