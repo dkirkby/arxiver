@@ -6,4 +6,7 @@
     let topic=document.querySelector('.subheader h1').textContent.split(/\s*>\s*/)[0];
     let path=topic + "/" + year + "/" + title + ".pdf";
     alert("Saving to " + path);
+    chrome.identity.getAuthToken({"interactive": false}, function(token) {
+        alert("Got token: " + token);
+    });
 }
