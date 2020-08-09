@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arxiver</title>
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <script src="arxiver.js"></script>
 </head>
 <body>
     <h1>Arxiv PDF to Google Drive</h1>
-    <form action="">
+    <div id="form">
         <label for="id">Enter an arxiv identifier nnnn.nnnn to download to your google drive:</label>
-        <input type="text" id="id" name="id" required><br>
+        <input type="text" id="id" name="id" placeholder="nnnn.nnnn" required><br>
 
         <label for="root">Name of the existing root folder on your google drive where downloads are stored:</label>
         <input type="text" id="root" name="root" value="arxiver"><br>
 
-        <input type="submit" value="DOWNLOAD">
-    </form>
+        <button id="submit" type="button">DOWNLOAD</button>
+    </div>
+
+    <div id="result">
+        <div id="message"></div>
+        <div id="path"></div>
+        <div id="title"></div>
+    </div>
 
     <p>
         Downloads are stored on your google drive as:
