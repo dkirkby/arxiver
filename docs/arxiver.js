@@ -30,8 +30,13 @@ $(document).ready(function() {
                     div.append(link(result["year"], result["yearLink"]));
                     div.append(text(" / "));
                     div.append(link(result["name"], result["fileLink"]));
-                    //let size = new Number(result["pdfSize"]) / (1 << 20);
-                    //div.append(text(" (" + size.toFixed(2) + "Mb)"));
+                    let size = new Number(result["pdfSize"]);
+                    if(size == 0) {
+                        div.append(text(" (already downloaded)"));
+                    }
+                    else {
+                        div.append(text(" (" + (size / (1 << 20)).toFixed(2) + "Mb)"));
+                    }
                 }
                 else {
                     div.append(text(result["message"]).addClass("error"));
