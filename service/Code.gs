@@ -147,6 +147,7 @@ function doGet(e) {
     result['year'] = info['year'];
     // Fetch the PDF file.
     pdfBlob = getPdf(info['pdfLink'], new Number(e.parameter['maxsize'] || (40 << 20)), result);
+    result['pdfSize'] = pdfBlob.getBytes().length;
     // Find the destination folder, creating the path if necessary.
     var categoryFolder = enterFolder(rootFolder, info['category']);
     result['categoryLink'] = categoryFolder.getUrl();
@@ -159,14 +160,16 @@ function doGet(e) {
     result['fileLink'] = file.getUrl();
     // Set the file name and description. Note that drive does not have any restrictions on the
     // characters used, although some might cause problems when mirroring to a local disk.
-    // Truncate the name length to 250 bytes and make some character substitutions.
     var name = info['title'];
+    // Replace sequences of whitespace (including newline) with a single space.
+    name = name.replace(/\s+/g, ' ');
+    // Replace sequences of special characters with a single underscore.
+    name = name.replace(/[\*\/]+/g, '_')
+    // Truncate to the requested maximum length (after substitutions).
     var maxlen = new Number(e.parameter['maxlen'] || 250);
     if(name.length > maxlen) {
       name = name.substr(0, maxlen-1);
     }
-    name = name.replace('\n', ' ');
-    name = name.replace('/', '_');
     name = name + '.pdf';
     result['name'] = name;
     file.setName(name);
@@ -178,5 +181,13 @@ function doGet(e) {
     result['status'] = 'error';
     result['message'] = error.message;
   }
-  return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+  // Return either JSON or JSONP, depending on whether we have a callback parameter.
+  var callback = e.parameter['callback'];
+  var json = JSON.stringify(result);
+  if(callback == null) {
+    return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
+  }
+  else {
+    return ContentService.createTextOutput(callback + '(' + json + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
 }
