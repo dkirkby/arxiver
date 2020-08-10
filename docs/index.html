@@ -14,7 +14,7 @@
     <h1>Arxiv PDF to Google Drive</h1>
     <div id="form">
         <label for="id">Enter an arxiv identifier nnnn.nnnn to download to your google drive:</label>
-        <input type="text" id="id" name="id" placeholder="nnnn.nnnn" required><br>
+        <input type="text" id="id" name="id" placeholder="nnnn.nnnnn" required><br>
 
         <label for="root">Name of the existing root folder on your google drive where downloads are stored:</label>
         <input type="text" id="root" name="root" value="arxiver"><br>
@@ -22,11 +22,7 @@
         <button id="submit" type="button">DOWNLOAD</button>
     </div>
 
-    <div id="result">
-        <div id="message"></div>
-        <div id="path"></div>
-        <div id="title"></div>
-    </div>
+    <div id="results"></div>
 
     <p>
         Downloads are stored on your google drive as:
