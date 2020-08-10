@@ -5,7 +5,7 @@ function link(name, target) {
 }
 
 function text(content) {
-    return $("<span></span>").text(content);
+    return $("<span></span>").html(content);
 }
 
 $(document).ready(function() {
